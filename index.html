@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>OST-Bench Leaderboard</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .hero.is-small {
+          padding: 3rem 1.5rem;
+      }
+      .content-highlight {
+          max-width: 900px;
+          margin: 2rem auto;
+          padding: 1.5rem;
+          background-color: #f8f9fa;
+          border-radius: 8px;
+          box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      }
+      .feature-list {
+          text-align: left;
+          display: inline-block;
+          max-width: 800px;
+          margin: 0 auto;
+      }
+      .feature-list li {
+          margin-bottom: 0.8rem;
+          line-height: 1.6;
+      }
+      .feature-list strong {
+          color: #3273dc;
+      }
+      .carousel-item {
+          padding: 2rem 0;
+          transition: all 0.3s ease;
+      }
+      .carousel-item img {
+          max-height: 600px;
+          width: auto;
+          margin: 0 auto;
+          border-radius: 6px;
+          box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      }
+      .image-caption {
+          max-width: 800px;
+          margin: 1.5rem auto 0;
+          padding: 1rem;
+          background-color: #f5f5f5;
+          border-radius: 6px;
+          font-size: 1.1rem;
+          line-height: 1.5;
+      }
+      .section-title {
+          margin-bottom: 1.5rem;
+          position: relative;
+          display: inline-block;
+      }
+      .section-title:after {
+          content: "";
+          position: absolute;
+          bottom: -10px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 80px;
+          height: 3px;
+          background: linear-gradient(90deg, #3273dc, #00d1b2);
+          border-radius: 3px;
+      }
+        .leaderboard-card {
+            margin: 2rem auto;
+            max-width: 1000px;
+            box-shadow: 0 0.5em 1em -0.125em rgba(10,10,10,0.1);
+        }
+        .model-name { font-weight: 600; }
+        .score-cell {
+            font-family: monospace;
+            text-align: center;
+            width: 150px;
+        }
+        .overall-score {
+            font-weight: bold;
+            font-size: 1.1em;
+            color: #3273dc;
+        }
+        .section-header {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        .baseline-row { font-style: italic; }
+    </style>
+
+  <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
+  <!-- Replace the content tag with appropriate information -->
+  <meta name="description" content="DESCRIPTION META TAG">
+  <meta property="og:title" content="SOCIAL MEDIA TITLE TAG"/>
+  <meta property="og:description" content="SOCIAL MEDIA DESCRIPTION TAG TAG"/>
+  <meta property="og:url" content="URL OF THE WEBSITE"/>
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
+  <meta property="og:image" content="static/image/your_banner_image.png" />
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+
+
+  <meta name="twitter:title" content="TWITTER BANNER TITLE META TAG">
+  <meta name="twitter:description" content="TWITTER BANNER DESCRIPTION META TAG">
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
+  <meta name="twitter:image" content="static/images/your_twitter_banner_image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- Keywords for your paper to be indexed by-->
+  <meta name="keywords" content="KEYWORDS SHOULD BE PLACED HERE">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <title>OST-Bench:</title>
+  <link rel="icon" type="image/x-icon" href="static/images/ost.ico">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+  rel="stylesheet">
+
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script src="static/js/bulma-carousel.min.js"></script>
+  <script src="static/js/bulma-slider.min.js"></script>
+  <script src="static/js/index.js"></script>
+</head>
+<body>
+
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">OST-Bench: Evaluating the Capabilities of MLLMs in Online Spatio-temporal Scene Understanding</h1>
+            <div class="is-size-5 publication-authors">
+              <!-- Paper authors -->
+              <span class="author-block">
+                <a href="FIRST AUTHOR PERSONAL LINK" target="_blank">First Author</a><sup>*</sup>,</span>
+                <span class="author-block">
+                  <a href="SECOND AUTHOR PERSONAL LINK" target="_blank">Second Author</a><sup>*</sup>,</span>
+                  <span class="author-block">
+                    <a href="THIRD AUTHOR PERSONAL LINK" target="_blank">Third Author</a>
+                  </span>
+                  </div>
+
+                  <div class="is-size-5 publication-authors">
+                    <span class="author-block">Institution Name<br>Conferance name and year</span>
+                    <span class="eql-cntrb"><small><br><sup>*</sup>Indicates Equal Contribution</small></span>
+                  </div>
+
+                  <div class="column has-text-centered">
+                    <div class="publication-links">
+                         <!-- Arxiv PDF link -->
+                      <span class="link-block">
+                        <a href="https://arxiv.org/pdf/<ARXIV PAPER ID>.pdf" target="_blank"
+                        class="external-link button is-normal is-rounded is-dark">
+                        <span class="icon">
+                          <i class="fas fa-file-pdf"></i>
+                        </span>
+                        <span>Paper</span>
+                      </a>
+                    </span>
+
+
+                  <!-- Github link -->
+                  <span class="link-block">
+                    <a href="https://github.com/rbler1234/OST-Bench" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code</span>
+                  </a>
+                </span>
+
+                <!-- data_1 link -->
+                <span class="link-block">
+                  <a href="https://huggingface.co/datasets/rbler/OST-Bench_v1/tree/main" target="_blank"
+                  class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="fas fa-database"></i>
+                  </span>
+                  <span>Data</span>
+                </a>
+              </span>
+
+                <!-- ArXiv abstract Link -->
+                <span class="link-block">
+                  <a href="https://arxiv.org/abs/<ARXIV PAPER ID>" target="_blank"
+                  class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Teaser video-->
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <video poster="" id="tree" autoplay controls muted loop height="100%">
+        <!-- Your video here -->
+        <source src="static/videos/demo.mp4"
+        type="video/mp4">
+      </video>
+      <h2 class="subtitle has-text-centered">
+        The video illustrates OST-Bench online setting, for the same question, the agent's answers evolve as it explores the scene, changing from t1 to t2 to t3, reflecting its continuously updated understanding. 
+      </h2>
+    </div>
+  </div>
+</section>
+<!-- End teaser video -->
+
+<!-- Paper abstract -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3 section-title">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Recent advances in multimodal large language models (MLLMs) have shown remarkable capabilities
+in integrating vision and language for complex reasoning. While most existing benchmarks evaluate models under offline settings with a fixed set of pre-recorded inputs, we introduce OST-Bench, a benchmark designed to evaluate Online Spatio-Temporal understanding from the perspective of an agent actively exploring a scene. Built on an efficient data collection pipeline, OST-Bench consists of 1.4k scenes and 10k question-answer pairs collected from ScanNet, Matterport3D, and ARKitScenes. We evaluate several leading MLLMs on OST-Bench and observe that they fall short on tasks requiring complex spatio-temporal reasoning. Further experimental analysis highlights the core challenges that must be addressed to improve online embodied reasoning.  
+          </p>
+</div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End paper abstract -->
+
+
+<!-- Image carousel -->
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <!-- 标题部分 -->
+      <div class="columns is-centered has-text-centered" style="margin-bottom: -5rem;">
+        <div class="column">
+          <h2 class="title is-3 section-title" style="margin-bottom: -5rem;">Overview</h2>
+          
+          <!-- 新增的两行介绍文本（字体更大、带圆点、关键字加粗） -->
+          <div class="content-highlight">
+            <ul class="feature-list">
+              <li>
+                <strong>1. Online Processing</strong>: Continuously process and reason over incrementally acquired observations in real-time.
+              </li>
+              <li>
+                <strong>2. Spatio-Temporal Integration</strong>: Dynamically combine current observations with memory to support spatial reasoning across time.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- 轮播部分（放大图片） -->
+      <div class="columns is-centered" style="margin-top: 0;">
+        <div class="column is-10">
+          <div id="results-carousel" class="carousel results-carousel">
+            <div class="item has-text-centered">
+              <img src="static/images/benchmark_samples.png" alt="Benchmark Samples" 
+                   style="max-height: 1100px; width: auto; "/>
+              <h2 class="subtitle">OST-Bench categorizes questions into three main categories. Each main category includes several subtypes; in total, the benchmark comprises 15 fine-grained question subtypes.</h2>
+            </div>
+            <div class="item has-text-centered">
+              <img src="static/images/static.png" alt="Static Analysis" 
+                   style="max-height: 1100px; width: auto; "/>
+              <h2 class="subtitle">OST-Bench dataset statistics: (Left) Subtype distribution, (Right) Top: word cloud, Bottom: dialogue length distribution.</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End image carousel -->
+
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+      <div class="column">
+      <h2 class="title is-3 section-title">Leaderboard</h2>
+      <div class="leaderboard-card">
+          <div class="card">
+              <div class="card-content p-0">
+                  <div class="table-container">
+                      <table class="table is-fullwidth is-hoverable">
+                          <thead>
+                              <tr>
+                                  <th>Type</th>
+                                  <th>Model</th>
+                                  <th class="score-cell overall-score">Overall</th>
+                                  <th class="score-cell">Agent State</th>
+                                  <th class="score-cell">Agent Visible Info</th>
+                                  <th class="score-cell">Agent Object Spatial</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <!-- Proprietary Models -->
+                              <tr class="section-header">
+                                  <td colspan="6">Proprietary Models</td>
+                              </tr>
+                              <tr>
+                                  <td><i class="fas fa-lock"></i></td>
+                                  <td class="model-name">Claude-3.5-Sonnet</td>
+                                  <td class="score-cell overall-score">47.77</td>
+                                  <td class="score-cell">45.55</td>
+                                  <td class="score-cell">65.56</td>
+                                  <td class="score-cell">32.85</td>
+                              </tr>
+                              <tr>
+                                  <td><i class="fas fa-lock"></i></td>
+                                  <td class="model-name">Gemini-2.0-Flash</td>
+                                  <td class="score-cell overall-score">49.54</td>
+                                  <td class="score-cell">45.05</td>
+                                  <td class="score-cell">70.82</td>
+                                  <td class="score-cell">33.80</td>
+                              </tr>
+                              <tr>
+                                  <td><i class="fas fa-lock"></i></td>
+                                  <td class="model-name">Gemini-2.0-Flash (Thinking)</td>
+                                  <td class="score-cell overall-score">54.25</td>
+                                  <td class="score-cell">47.05</td>
+                                  <td class="score-cell">72.30</td>
+                                  <td class="score-cell">42.75</td>
+                              </tr>
+                              <tr>
+                                  <td><i class="fas fa-lock"></i></td>
+                                  <td class="model-name">GPT-4o</td>
+                                  <td class="score-cell overall-score">48.72</td>
+                                  <td class="score-cell">38.83</td>
+                                  <td class="score-cell">72.76</td>
+                                  <td class="score-cell">33.52</td>
+                              </tr>
+                              <tr>
+                                  <td><i class="fas fa-lock"></i></td>
+                                  <td class="model-name">GPT-4.1</td>
+                                  <td class="score-cell overall-score">53.40</td>
+                                  <td class="score-cell">47.23</td>
+                                  <td class="score-cell">76.46</td>
+                                  <td class="score-cell">37.65</td>
+                              </tr>
+                              
+                              <!-- Open-Source Models -->
+                              <tr class="section-header">
+                                  <td colspan="6">Open-Source Models</td>
+                              </tr>
+                              <tr>
+                                  <td><i class="fas fa-lock-open"></i></td>
+                                  <td class="model-name">InternVL-2.5-8B</td>
+                                  <td class="score-cell overall-score">38.98</td>
+                                  <td class="score-cell">41.88</td>
+                                  <td class="score-cell">52.78</td>
+                                  <td class="score-cell">29.18</td>
+                              </tr>
+                              <tr>
+                                  <td><i class="fas fa-lock-open"></i></td>
+                                  <td class="model-name">InternVL-2.5-38B</td>
+                                  <td class="score-cell overall-score">50.78</td>
+                                  <td class="score-cell">45.38</td>
+                                  <td class="score-cell">73.88</td>
+                                  <td class="score-cell">33.95</td>
+                              </tr>
+                              <tr>
+                                  <td><i class="fas fa-lock-open"></i></td>
+                                  <td class="model-name">InternVL-2.5-78B</td>
+                                  <td class="score-cell overall-score">51.08</td>
+                                  <td class="score-cell">46.45</td>
+                                  <td class="score-cell">74.02</td>
+                                  <td class="score-cell">32.93</td>
+                              </tr>
+                              <tr>
+                                  <td><i class="fas fa-lock-open"></i></td>
+                                  <td class="model-name">QwenVL-2.5-7B</td>
+                                  <td class="score-cell overall-score">41.16</td>
+                                  <td class="score-cell">40.43</td>
+                                  <td class="score-cell">52.56</td>
+                                  <td class="score-cell">31.53</td>
+                              </tr>
+                              <tr>
+                                  <td><i class="fas fa-lock-open"></i></td>
+                                  <td class="model-name">QwenVL-2.5-32B</td>
+                                  <td class="score-cell overall-score">46.86</td>
+                                  <td class="score-cell">43.75</td>
+                                  <td class="score-cell">64.90</td>
+                                  <td class="score-cell">32.18</td>
+                              </tr>
+                              <tr>
+                                  <td><i class="fas fa-lock-open"></i></td>
+                                  <td class="model-name">QwenVL-2.5-72B</td>
+                                  <td class="score-cell overall-score">45.62</td>
+                                  <td class="score-cell">43.48</td>
+                                  <td class="score-cell">64.46</td>
+                                  <td class="score-cell">28.87</td>
+                              </tr>
+                              <tr>
+                                  <td><i class="fas fa-lock-open"></i></td>
+                                  <td class="model-name">LLaVA-Video-7B</td>
+                                  <td class="score-cell overall-score">39.28</td>
+                                  <td class="score-cell">33.50</td>
+                                  <td class="score-cell">58.32</td>
+                                  <td class="score-cell">28.80</td>
+                              </tr>
+                              <tr>
+                                  <td><i class="fas fa-lock-open"></i></td>
+                                  <td class="model-name">LLaVA-Video-72B</td>
+                                  <td class="score-cell overall-score">43.22</td>
+                                  <td class="score-cell">39.95</td>
+                                  <td class="score-cell">60.48</td>
+                                  <td class="score-cell">35.07</td>
+                              </tr>
+                              <tr>
+                                  <td><i class="fas fa-lock-open"></i></td>
+                                  <td class="model-name">LLaVA-Onevision-7B</td>
+                                  <td class="score-cell overall-score">40.36</td>
+                                  <td class="score-cell">31.08</td>
+                                  <td class="score-cell">55.24</td>
+                                  <td class="score-cell">33.63</td>
+                              </tr>
+                              <tr>
+                                  <td><i class="fas fa-lock-open"></i></td>
+                                  <td class="model-name">LLaVA-Onevision-72B</td>
+                                  <td class="score-cell overall-score">43.44</td>
+                                  <td class="score-cell">38.88</td>
+                                  <td class="score-cell">61.60</td>
+                                  <td class="score-cell">36.23</td>
+                              </tr>
+                              
+                              <!-- Baseline References -->
+                              <tr class="section-header">
+                                  <td colspan="6">Baseline References</td>
+                              </tr>
+                              <tr class="baseline-row">
+                                  <td><i class="fas fa-user"></i></td>
+                                  <td>Human-Level</td>
+                                  <td class="score-cell overall-score">84.05</td>
+                                  <td class="score-cell">74.83</td>
+                                  <td class="score-cell">93.40</td>
+                                  <td class="score-cell">81.02</td>
+                              </tr>
+                              <tr class="baseline-row">
+                                  <td><i class="fas fa-random"></i></td>
+                                  <td>Chance-Level</td>
+                                  <td class="score-cell overall-score">35.73</td>
+                                  <td class="score-cell">44.28</td>
+                                  <td class="score-cell">32.42</td>
+                                  <td class="score-cell">35.72</td>
+                              </tr>
+                          </tbody>
+                      </table>
+                  </div>
+              </div>
+              <footer class="card-footer">
+                  <a href="https://github.com/rbler1234/OST-Bench" class="card-footer-item">Submit Results</a>
+                  <a href="https://github.com/rbler1234/OST-Bench" class="card-footer-item">View Details</a>
+              </footer>
+          </div>
+        </div>
+      </div>
+  </div>
+</section>
+
+
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <!-- 标题部分 -->
+      <div class="columns is-centered has-text-centered" style="margin-bottom: -5rem;">
+        <div class="column">
+          <h2 class="title is-3 section-title" style="margin-bottom: -5rem;">Analysis</h2>
+          
+          <!-- 新增的两行介绍文本（字体更大、带圆点、关键字加粗） -->
+          <div class="content-highlight">
+            <ul class="feature-list">
+              <li>
+                <strong>1. Performance Drop During Exploration.</strong>: we observe a significant decline in model accuracy as the agent continues to explore with an increasing number of sequential observations in the online setting.
+              </li>
+              <li>
+                <strong>2. Error Distribution Statistics</strong>: Reasoning Errors account for over 60% of all errors, making them the primary bottleneck.
+              </li>
+              <li>
+                <strong>3. Spatio-temporal Reasoning Shortcut</strong>: models tend to avoid retrieving key information, instead taking shortcuts and relying on shallow, unsupported inferences.
+              </li>
+              <li>
+                <strong>4. Cross-View Analysis</strong>: The model's performance drops significantly when faced with either complex clue-based spatial reasoning requirements or long-term memory retrieval demands.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- 轮播部分（放大图片） -->
+      <div class="columns is-centered" style="margin-top: 0;">
+        <div class="column is-10">
+          <div id="results-carousel" class="carousel results-carousel">
+            <div class="item has-text-centered">
+              <img src="static/images/analysis1.png" alt="Benchmark Samples" 
+                   style="max-height: 1100px; width: auto; "/>
+              <h2 class="subtitle">Model performance over exploration time.</h2>
+            </div>
+            <div class="item has-text-centered">
+              <img src="static/images/analysis2.png" alt="Benchmark Samples" 
+                   style="max-height: 1100px; width: auto; "/>
+              <h2 class="subtitle">Distribution of three error types across the three task categories in OST-Bench.</h2>
+            </div>
+            <div class="item has-text-centered">
+              <img src="static/images/analysis3.png" alt="Benchmark Samples" 
+                   style="max-height: 1100px; width: auto; "/>
+              <h2 class="subtitle">Examples of Spatio-temporal Reasoning Shortcut.</h2>
+            </div>
+            <div class="item has-text-centered">
+              <img src="static/images/analysis4.png" alt="Benchmark Samples" 
+                   style="max-height: 1100px; width: auto; "/>
+              <h2 class="subtitle">Model performance across four task settings.</h2>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+<!--BibTex citation -->
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title">BibTeX</h2>
+      <pre><code>BibTex Code Here</code></pre>
+    </div>
+</section>
+<!--End BibTex citation -->
+
+
+  <footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+
+          <p>
+            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+            You are free to borrow the source code of this website, we just ask that you link back to this page in the footer. <br> This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Statcounter tracking code -->
+  
+<!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
+
+    <!-- End of Statcounter Code -->
+
+  </body>
+  </html>
